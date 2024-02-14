@@ -21,13 +21,40 @@ elif shape.lower() == "circle":
     radius = input("What is the radius of your circle?")
 
 def polygon_area(length: float, sides: int) -> float:
+    """
+    Calculate the area of a polygon
+
+    Parameters
+    ----------
+    length : float
+    sides : int
+
+    Returns
+    -------
+    Float : Area of your polygon
+    """
     if not isinstance(length, float) or not isinstance(sides, int):
         raise ValueError
     return (length ** 2 * sides) / (4 * (math.tan(math.pi / sides)))
 
+def circle_area(radius: float) -> float:
+    """
+    Calculate the area of a circle
+
+    Parameters
+    ----------
+    radius : float
+
+    Returns
+    -------
+    Float : Area of your circle
+    """
+    if not isinstance(radius, float):
+        raise ValueError
+    return math.pi * radius ** 2
+
 
 if __name__ == "__main__":
-    if not isinstance(shape, str): raise ValueError
 
     if shape.lower() == "polygon":
         try:
@@ -39,7 +66,7 @@ if __name__ == "__main__":
     elif shape.lower() == "circle":
         try:
             radius = float(radius)
-            print(f"The area of a circle with radius {radius} is {int(math.pi * radius ** 2)}")
+            print(f"The area of a circle with radius {radius} is {int(circle_area(radius))}")
         except ValueError:
             print("Invalid input: Length has to be a float, sides has to be an int.")
     else:
