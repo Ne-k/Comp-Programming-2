@@ -27,6 +27,8 @@ def polygon_area(length: float, sides: int) -> float:
 
 
 if __name__ == "__main__":
+    if not isinstance(shape, str): raise ValueError
+
     if shape.lower() == "polygon":
         try:
             length = float(length)
