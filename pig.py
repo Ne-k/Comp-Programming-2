@@ -24,58 +24,64 @@ a computer player. Keep that in mind as you think about the design.
 You’ll also need to include randomization in your program to simulate rolling a die. There is information on including
 randomization in the docs tab (Basics > Random Numbers) or in this tutorial.
 """
+
 import random
-import time
-
-round = 0
-player_score = 0
-computer_score = 0
 
 
-def roll_die() -> int:
+
+def roll_die():
     return random.randint(1, 6)
 
 
-def player_turn() -> int:
+def player_turn(player_score):
     round_score = 0
     while True:
-        player_dice = roll_die()
-        print("Rolling. . .")
-        time.sleep(1.5)
-
-        if player_dice == 1:
-            print(f"You rolled a {player_dice}! Your turn is over.")
-            return 0
+        choice = input("Do you want to 'roll', 'pass' or 'bank' your round score? (r/p/b) ")
+        if choice.lower() == 'r':
+            roll = roll_die()
+            if roll == 1:
+                print("You rolled a 1! No points added to your total score.")
+                return player_score
+            else:
+                round_score += roll
+                print(f"You rolled a {roll}. Your round score is {round_score}.")
+        elif choice.lower() == 'b':
+            player_score += round_score
+            print(f"You banked your score. Your total score is now {player_score}.")
+            return player_score
+        elif choice.lower() == 'p':
+            print("You chose to pass your turn.")
+            return player_score
         else:
-            print(f"You rolled a {player_dice}!")
-            round_score += player_dice
-            print(f"Your round score is now {round_score}")
-            choice = input("Would you like to roll again or bank your points? (r/b) ")
-            if choice.lower() == "b":
-                return round_score
-            elif choice.lower() == "r":
-                continue
+            print("Invalid choice. Please enter 'r' to roll, 'p' to pass or 'b' to bank.")
 
+def computer_turn(comp_score):
+    round_score = 0
+    while True:
+        roll = roll_die()
+        if roll == 1:
+            print("Computer rolled a 1! No points added to its total score.")
+            return comp_score
+        else:
+            round_score += roll
+            print(f"Computer rolled a {roll}. Its round score is {round_score}.")
+            if round_score >= 20:
+                comp_score += round_score
+                print(f"Computer banked its score. Its total score is now {comp_score}.")
+                return comp_score
 
-def game():
+def play_game():
+    player_score = 0
+    computer_score = 0
     while player_score < 100 and computer_score < 100:
-        round += 1
-        print(f"Round: {round}")
-        time.sleep(2.5)
-        print(f"Player Score: {player_score}")
-        print(f"Computer Score: {computer_score}\n--------------")
-        time.sleep(2.5)
-        print("Player's Turn:")
-    return None
-
-
-def main():
-    choice = input("Would you like to play a game of Pig? (y/n) ")
-    if choice.lower() == "y":
-        game()
-    else:
-        print("Goodbye!")
-
+        print("\nYour turn.")
+        player_score = player_turn(player_score)
+        if player_score >= 100:
+            print("Congratulations! You won the game!")
+            return
+        print("\nComputer's turn.")
+        computer_score = computer_turn(computer_score)
+    print("Computer won the game.")
 
 if __name__ == "__main__":
-    main()
+    play_game()
