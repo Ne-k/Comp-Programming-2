@@ -27,16 +27,24 @@ randomization in the docs tab (Basics > Random Numbers) or in this tutorial.
 
 import random
 
+player_score = 0
+computer_score = 0
 
 
-def roll_die():
+def roll_die(probability: float = 0):
     return random.randint(1, 6)
 
 
 def player_turn(player_score):
+    """
+    Execute the player's turn.
+    :param player_score: The current score for the player
+    :return: Updated player's score after player's turn.
+    """
     round_score = 0
+    winning_probability = 0
     while True:
-        choice = input("Do you want to 'roll', 'pass' or 'bank' your round score? (r/p/b) ")
+        choice = input("'roll', or 'bank' your round score? (r/b) ")
         if choice.lower() == 'r':
             roll = roll_die()
             if roll == 1:
@@ -49,11 +57,9 @@ def player_turn(player_score):
             player_score += round_score
             print(f"You banked your score. Your total score is now {player_score}.")
             return player_score
-        elif choice.lower() == 'p':
-            print("You chose to pass your turn.")
-            return player_score
         else:
-            print("Invalid choice. Please enter 'r' to roll, 'p' to pass or 'b' to bank.")
+            print("Invalid choice. Please enter 'r' to roll, or 'b' to bank.")
+
 
 def computer_turn(comp_score):
     round_score = 0
@@ -70,18 +76,30 @@ def computer_turn(comp_score):
                 print(f"Computer banked its score. Its total score is now {comp_score}.")
                 return comp_score
 
+
 def play_game():
     player_score = 0
     computer_score = 0
     while player_score < 100 and computer_score < 100:
-        print("\nYour turn.")
+        print(f'\nYour turn.')
+        print(f'| Your Score: {player_score} | Computer Score: {computer_score} |')
         player_score = player_turn(player_score)
         if player_score >= 100:
             print("Congratulations! You won the game!")
-            return
+            res = str(input("Play again? (y/n) "))
+            if res.lower() == "y":
+                play_game()
+            else:
+                return
         print("\nComputer's turn.")
         computer_score = computer_turn(computer_score)
     print("Computer won the game.")
+    res = str(input("Play again? (y/n) "))
+    if res.lower() == "y":
+        play_game()
+    else:
+        return
+
 
 if __name__ == "__main__":
     play_game()
