@@ -31,11 +31,15 @@ def list_of_cubes(start: int, stop: int) -> None:
     except ValueError:
         print("Invalid input: Start and stop have to be integers.")
 
+
 # Problem 2
 def pizza_modifier(toppings: list, new_topping: str) -> None:
     return None
+
+
 def main():
     list_of_cubes(5, 10)
+
 
 if __name__ == "__main__":
     main()
