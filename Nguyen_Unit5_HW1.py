@@ -19,9 +19,14 @@ def main():
     ]
     print(class_data)
 # Print the first name, last name, and test # for all tests above 80
-
+    for i in range(1, len(class_data)):
+        if class_data[i][3] > 80:
+            print(class_data[i][0], class_data[i][1],
 
 # Print the first and last name of the student with the highest grade for each test
+    for i in range(1, len(class_data)):
+        if class_data[i][3] > 80:
+            print(class_data[i][0], class_data[i][1],
 
 # Add a new student named Parker Letmate with test scores of 98, 94, and 99.
 # Then repeat the above steps
