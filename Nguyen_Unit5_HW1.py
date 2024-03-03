@@ -18,18 +18,30 @@ def main():
         ["Michael", "Brown", 3, 90]
     ]
     print(class_data)
-# Print the first name, last name, and test # for all tests above 80
-    for i in range(1, len(class_data)):
-        if class_data[i][3] > 80:
-            print(class_data[i][0], class_data[i][1],
+
+    highest_grades = [[None, None, i, 0] for i in range(1, 4)]
+
+    # Print the first name, last name, and test # for all tests above 80
+    for student in class_data[1:]:
+        first_name, last_name, test_number, grade = student
+        if grade > highest_grades[test_number - 1][3]:
+            highest_grades[test_number - 1] = [first_name, last_name, test_number, grade]
 
 # Print the first and last name of the student with the highest grade for each test
-    for i in range(1, len(class_data)):
-        if class_data[i][3] > 80:
-            print(class_data[i][0], class_data[i][1],
+    for first_name, last_name, test_number, grade in highest_grades:
+        print(f"Test #{test_number}: {first_name} {last_name} with a grade of {grade}")
 
 # Add a new student named Parker Letmate with test scores of 98, 94, and 99.
+    class_data.append(["Parker", "Letmate", 1, 98])
+    class_data.append(["Parker", "Letmate", 2, 94])
+    class_data.append(["Parker", "Letmate", 3, 99])
+    print(class_data)
+    # new_student_data = [["Parker", "Letmate", test_num, score] for test_num, score in zip(range(1, 4), [98, 94, 99])]
+    # class_data += new_student_data
+    # print(class_data)
+
 # Then repeat the above steps
+
 
 if __name__ == "__main__":
     main()
