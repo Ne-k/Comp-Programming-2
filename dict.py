@@ -80,6 +80,43 @@ def reverse_lookup(color: str, dict: dict) -> list:
 
 color = 'purple'
 print(f"The following people have a favorite color of {color}\n{"\n".join(reverse_lookup(color, favorite_colors))}")
-# import json
-# with open('Period8_favorite_colors.json', 'w') as f:
-#     json.dump(favorite_colors, f, indent=4, sort_keys=True)
+
+# Looping through dictionaries
+
+# By key value pairs
+#   key      value
+for person, color in favorite_colors.items():
+    print(f"{person.title()} likes the color {color.lower()}")
+
+# By values
+color_string = ""
+for color in set(favorite_colors.values()):  # Set removes duplicates
+    color_string += f"{color.lower()}, "
+
+color_string = color_string[:-2] + "."  # Remove the last comma and add a period
+print(f"The colors mentioned were: {color_string}")
+
+# By keys
+student_string = ""
+for student in sorted(favorite_colors.keys()): # sorted will alphabetize the list
+    student_string += f"{student}, "
+student_string = student_string[:-2] + "."
+print(f"The students are: {student_string}")
+
+# Nesting info with dictionaries
+users = {
+    "aeinstein": {
+        "first": "albert",
+        "last": "einstein",
+        "location": "princeton"
+    },
+    "mcurie": {
+        "first": "marie",
+        "last": "curie",
+        "location": "paris"
+    }
+}
+#   Dict name   key       value
+print(users["aeinstein"]["location"])
+print(users['mcurie']['first'].title())
+print(users['aeinstein'])
