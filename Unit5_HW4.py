@@ -36,17 +36,24 @@ class_data_dict = {
     }
 }
 
+# Print the first name, last name, and test # for all tests above 80 Iterate over each student
 for student, tests in class_data_dict.items():
-    for test_num, score in tests["tests"].items():
-        if score > 80:
-            print(student, test_num, score)
+    scores = [score for test_num, score in tests["tests"].items()]
+    print(f'{student.title()} in tests 1,2,3 got a score of {",".join(map(str, scores))}')
 
-highest_grades = [[None, None, i, 0] for i in range(1, 4)]
+
+# Print the first and last name of the student with the highest grade for each test
+highest_grades_per_student = {}
+
 for student, tests in class_data_dict.items():
+    highest_grade = 0
     for test_num, score in tests["tests"].items():
-        if score > highest_grades[test_num - 1][3]:
-            highest_grades[test_num - 1] = [student, test_num, score]
+        if score > highest_grade:
+            highest_grade = score
+    highest_grades_per_student[student] = highest_grade
 
+for student, highest_grade in highest_grades_per_student.items():
+    print(f"The highest grade for {student} is {highest_grade}")
 
 # Add a new student named Parker Letmate with test scores of 98, 94, and 99.
 class_data_dict["Parker"] = {
@@ -56,5 +63,3 @@ class_data_dict["Parker"] = {
         3: 99
     }
 }
-
-# Add a new student named Parker Letmate with test scores of 98, 94, and 99.
