@@ -20,11 +20,13 @@ def reverse_lookup(d: dict, v: str) -> list:
     return keys
 
 
-
-
 # Problem 2
 def text_to_keypress(text):
-    # Define the mapping of characters to key presses
+    """
+    This function takes a string and returns the keypresses needed to type the string on a phone.
+    :param text: The string you want to convert to keypresses
+    :return: The keypresses needed to type the string on a phone
+    """
     keypresses = {
         'a': '2', 'b': '22', 'c': '222',
         'd': '3', 'e': '33', 'f': '333',
@@ -44,8 +46,13 @@ def text_to_keypress(text):
 
     return result
 
+
 # Problem 3
-def count_unique_chars():
+def count_unique_chars() -> None:
+    """
+    This function takes a string and prints the number of unique characters in the string.
+    :return: None
+    """
     text = input("Enter a string: ")
     unique_chars = {}
     for char in text:
@@ -53,8 +60,14 @@ def count_unique_chars():
             unique_chars[char] = 1
     print(f"The string has {len(unique_chars)} unique characters.")
 
+
 # Problem 4
-def number_to_words(n):
+def number_to_words(n: int) -> str:
+    """
+    This function takes a number between 0 and 999 and returns the number as a string in English.
+    :param n: The number you want converted to word
+    :return: The parameter n to words
+    """
     ones = {
         1: 'one', 2: 'two', 3: 'three', 4: 'four', 5: 'five',
         6: 'six', 7: 'seven', 8: 'eight', 9: 'nine'
@@ -73,12 +86,12 @@ def number_to_words(n):
     elif 10 <= n < 20:
         return teens[n]
     elif 20 <= n < 100:
-        if n % 10 == 0:
+        if n % 10 == 0:  # if the number is a multiple of 10
             return tens[n // 10]
         else:
-            return tens[n // 10] + ' ' + ones[n % 10]
+            return tens[n // 10] + ' ' + ones[n % 10]  # if the number is not a multiple of 10
     elif 100 <= n < 1000:
-        if n % 100 == 0:
+        if n % 100 == 0:  # if the number is a multiple of 100
             return ones[n // 100] + ' hundred'
         else:
             return ones[n // 100] + ' hundred ' + number_to_words(n % 100)
@@ -118,6 +131,7 @@ def main():
 
     # Problem 4
     print(number_to_words(int(input("Enter a number between 0 and 999: "))))
+
 
 if __name__ == "__main__":
     main()
