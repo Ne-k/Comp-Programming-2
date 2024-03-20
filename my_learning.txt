@@ -1,0 +1,1 @@
+In Python, you can easily slice strings, not use ; to end lines even though similarly to Java even though I still do it because of muscle memory, but Java is more beginner-friendly and pretty modular.
